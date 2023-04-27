@@ -1,0 +1,17 @@
+<html lang="en">
+<head>
+    <title>Model chat</title>
+</head>
+<body>
+{% if responce %}
+Answer: {{ responce|linebreaks }}
+{% endif %}
+<form method="get">
+    <label>
+        prompt
+        <input type="text" name="prompt" value="{{ prompt }}">
+    </label>
+    <input type="submit">
+</form>
+</body>
+</html>
