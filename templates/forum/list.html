@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Responses</title>
+{% endblock %}
+
+{% block content %}
+    <div class="card card-body mt-3">
+        <div class="container row">
+            <div class="col-4">
+                <h4 class="card-title mt-2">Responses</h4>
+            </div>
+            <form method="get" class="col-8">
+                <div class="input-group">
+                    <input name="filter" type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" value="{{ search }}">
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="bi bi-search"></i></button>
+                </div>
+            </form>
+        </div>
+        {% for response in object_list %}
+            <hr>
+            <h5 class="card-title">{{ response.prompt }}</h5>
+            <button type="button" class="btn btn-outline-secondary" style="width: 40px" onclick="location.href='{% url 'response-forum:details' response.id %}'"><i class="bi bi-three-dots"></i></button>
+        {% empty %}
+            <hr>
+            <p>Nothing here...</p>
+        {% endfor %}
+    </div>
+{% endblock %}

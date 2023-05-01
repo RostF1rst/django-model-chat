@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Model chat</title>
+    <title>Model chat</title>
 {% endblock %}
 
 {% block content %}
@@ -14,7 +14,7 @@
         <hr>
         <form method="get">
             <div class="form-check">
-                <input name="real" class="form-check-input" type="checkbox" id="real" value="asdfasdf">
+                <input name="real" class="form-check-input" type="checkbox" id="real" value="asdfasdf" {% if real %}checked{% endif %}>
                 <label class="form-check-label" for="real">Real response</label>
             </div>
             <div class="input-group">

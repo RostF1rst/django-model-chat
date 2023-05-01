@@ -5,9 +5,11 @@ from pyllamacpp.model import Model
 from django_model_chat.settings import BASE_DIR
 
 
-class GPTModel:
+class LlamaModel:
+    __path = os.path.join(BASE_DIR, 'model_chat', 'models', 'ggjt-model.bin')
+
     def __init__(self):
-        self.model = Model(os.path.join(BASE_DIR, 'model_chat', 'models', 'ggjt-model.bin'), seed=0)
+        self.model = Model(self.__path, seed=0)
 
     def get_answer(self, prompt='', full_answer=True):
         if not prompt:
