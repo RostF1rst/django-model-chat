@@ -1,7 +1,10 @@
-from django.shortcuts import render
-from django.views.generic import CreateView, ListView, DetailView
+from django.shortcuts import redirect
+from django.urls import reverse
+from django.http import HttpResponseBadRequest, HttpResponseForbidden
+from django.views.generic import ListView, DetailView
 
 from . import models
+from .forms import ResponseForm
 
 
 class ResponseListView(ListView):
@@ -22,5 +25,13 @@ class ResponseDetailView(DetailView):
     model = models.Response
 
 
-class CreateResponseView(CreateView):
-    template_name = 'forum/'
+def create_response(request):
+    if request.method == 'POST':
+        form = ResponseForm(request.POST)
+        if form.is_valid():
+            new_resp = form.save()
+            return redirect(reverse('response-forum:details', args=[new_resp.id]))
+        else:
+            return HttpResponseBadRequest(request)
+    else:
+        return HttpResponseForbidden(request)

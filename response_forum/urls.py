@@ -6,6 +6,6 @@ app_name = 'response-forum'
 
 urlpatterns = [
     path('', views.ResponseListView.as_view(), name='list'),
-    path('<int:pk>/', views.ResponseDetailView.as_view(), name='details'),
-    path('create', lambda x: None, name='create'),
+    path('<int:pk>', views.ResponseDetailView.as_view(), name='details'),
+    path('create', views.create_response, name='create'),
 ]

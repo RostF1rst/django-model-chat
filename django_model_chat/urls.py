@@ -21,6 +21,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('chat/', include('model_chat.urls')),
-    path('forum', include('response_forum.urls')),
+    path('forum/', include('response_forum.urls')),
     path('', lambda request: render(request=request, template_name='home.html'), name='home')
 ]

@@ -1,26 +1,40 @@
 {% extends 'base.html' %}
 
-{% block head %}
-    <title>Model chat</title>
-{% endblock %}
+{% block title %} Chat{% endblock %}
 
 {% block content %}
     <div class="card card-body mt-3">
-        {% if response %}
-            <p class="fs-5">Response: {{ response|linebreaks }}</p>
-        {% else %}
-            <p class="fs-3 text-center">Enter the prompt to get response</p>
-        {% endif %}
+        <div id="response-blank" style="display: none">
+            <h5 class="card-title mt-3">Response:</h5>
+            <div class="card card-body">
+                <p class="card-text" id="response-text" style="white-space: pre-line"></p>
+            </div>
+            <form id="post-response" class="mt-3" method="post" action="{% url 'response-forum:create' %}">
+                {% csrf_token %}
+                <input id="prompt-value" type="hidden" value="" name="prompt" required>
+                <input id="response-value" type="hidden" value="" name="response" required>
+                <input type="submit" class="btn btn-outline-secondary" value="Post this response">
+            </form>
+        </div>
+        <p id="welcoming-text" class="fs-3 text-center">Enter the prompt to get response</p>
         <hr>
-        <form method="get">
+        <form method="post" id="prompt-form">
+        {% csrf_token %}
             <div class="form-check">
-                <input name="real" class="form-check-input" type="checkbox" id="real" value="asdfasdf" {% if real %}checked{% endif %}>
+                <input class="form-check-input" type="checkbox" id="real" value="asdfasdf">
                 <label class="form-check-label" for="real">Real response</label>
             </div>
             <div class="input-group">
-                <input required="required" name="prompt" type="text" class="form-control" placeholder="Prompt" aria-label="Prompt" aria-describedby="submit-but" value="{{ prompt }}">
-                <button class="btn btn-outline-secondary" type="submit" id="submit-but"><i class="bi bi-send"></i></button>
+                <input id="prompt" required type="text" class="form-control" placeholder="Prompt" aria-label="Prompt" aria-describedby="submit-but">
+                <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-send"></i></button>
             </div>
         </form>
     </div>
+{% endblock %}
+
+{% block scrpits %}
+    {% load static %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/chat.js' %}"></script>
+    <script type="text/javascript">const responseUrl = '{% url 'model-chat:get-response' %}';</script>
 {% endblock %}

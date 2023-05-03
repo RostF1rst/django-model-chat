@@ -14,8 +14,9 @@ class LlamaModel:
     def get_answer(self, prompt='', full_answer=True):
         if not prompt:
             return 'No prompt!'
-        form_prompt = 'Prompt: {}\nResponce:'.format(prompt)
-        result = self.model.generate(form_prompt)
+        form_prompt = 'Prompt: {}\nResponse that is fully reasoned and justified and fully satisfies the prompt:'.\
+            format(prompt)
+        result = self.model.generate(form_prompt, n_predict=256)
         if not full_answer:
-            result = result.split('Responce:')[-1]
+            result = result.split('Response that is fully reasoned and justified and fully satisfies the prompt:')[-1]
         return result
