@@ -1,0 +1,17 @@
+<div class="container" id="response_list">
+    {% for response in object_list %}
+        <hr>
+        <div class="row d-flex">
+            <div class="col-11">
+                <h5 class="card-title">{{ response.prompt }}</h5>
+                <p class="card-text"><small class="text-muted">{{ response.publication_date }}</small></p>
+            </div>
+            <div class="col-1 text-center">
+                <a href="{% url 'response-forum:details' response.id %}"><p class="align-middle"><i class="bi bi-arrow-right"></i></p></a>
+            </div>
+        </div>
+    {% empty %}
+        <hr>
+        <p class="card-text">Nothing here...</p>
+    {% endfor %}
+</div>

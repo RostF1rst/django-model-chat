@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
     Responses
@@ -10,29 +11,16 @@
             <div class="col-4">
                 <h4 class="card-title mt-2">Responses</h4>
             </div>
-            <form method="get" class="col-8">
-                <div class="input-group">
-                    <input name="filter" type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" value="{{ search }}">
-                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="bi bi-search"></i></button>
-                </div>
-            </form>
+            <div class="col-8">
+                <input id="filter" name="filter" type="text" class="form-control" placeholder="Search" value="{{ search }}">
+            </div>
         </div>
-        <div class="container">
-            {% for response in object_list %}
-                <hr>
-                <div class="row d-flex">
-                    <div class="col-11">
-                        <h5 class="card-title">{{ response.prompt }}</h5>
-                        <p class="card-text"><small class="text-muted">{{ response.publication_date }}</small></p>
-                    </div>
-                    <div class="col-1 text-center">
-                        <a href="{% url 'response-forum:details' response.id %}"><p class="align-middle"><i class="bi bi-arrow-right"></i></p></a>
-                    </div>
-                </div>
-            {% empty %}
-                <hr>
-                <p>Nothing here...</p>
-            {% endfor %}
-        </div>
+        {% include 'forum/response_list.html' %}
     </div>
+{% endblock %}
+
+{% block scrpits %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">const responseListUrl='{% url 'response-forum:list_of_responses' %}'</script>
+    <script type="text/javascript" src="{% static 'js/response_list.js' %}"></script>
 {% endblock %}
