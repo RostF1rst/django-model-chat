@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    @{{ requested_user.username }}
+{% endblock %}
+
+{% block content %}
+    <div class="card card-body mt-3">
+        <div class="row">
+            <div class="col-auto">
+                <img src="{{ user.profile.avatar.url }}" alt="avatar" class="avatar rounded-circle bg-light" width="128" height="128">
+            </div>
+            <div class="col-auto">
+                <h2 class="card-title">@{{ requested_user.username }}</h2>
+            </div>
+        </div>
+        <hr>
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Responses to @{{ requested_user.username }}
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        {% if posts %}
+                            {% for post in posts %}
+                                <h5 class="card-title">{{ post.title }}</h5>
+                                <p class="card-text"><small class="text-muted">{{ post.publication_date }}</small></p>
+                                <button onclick="location.href='{% url 'block0:show_post' post.id %}'" type="button" class="btn btn-outline-primary">Show more...</button>
+                                {% if not forloop.last %}
+                                    <hr>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if requested_user == user %}
+            <hr>
+            <div class="d-grid gap-2 d-md-block">
+                <button class="btn btn-outline-primary" onclick="location.href='{% url 'users:settings' %}'">Settings</button>
+                <button class="btn btn-outline-danger" onclick="location.href='{% url 'users:logout' %}'">Log out</button>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

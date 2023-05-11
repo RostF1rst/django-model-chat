@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6">
+                <div class="card px-5 py-5">
+                    <div class="form-data">
+                        <div class=""><h4 class="text-center">Login</h4></div>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="forms-inputs">
+                                <label for="id_username" class="form-label">Username</label>
+                                <input name="username" type="text" class="form-control" id="id_username" aria-describedby="emailHelp"
+                                       autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="">
+                                <label for="id_password" class="form-label mt-3">Password</label>
+                                <input name="password" type="password" class="form-control"
+                                       id="id_password" autocomplete="current-password" required="">
+                            </div>
+                            <p class="card-text mt-1">
+                                <small class="text-muted">
+                                    New here? <a href="{% url 'users:register' %}">Register!</a>
+                                </small>
+                            </p>
+                            {% if form.errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    {% for error in form.non_field_errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            <div class="md-4">
+                                <button type="submit" class="btn btn-primary w-100">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,5 +1,10 @@
 */__pycache__
 .idea
 venv
-db.sqlite3
+
 model_chat/models
+media/user_avatars/*
+!media/user_avatars/default.png
+
+fake_users.txt
+db.sqlite3

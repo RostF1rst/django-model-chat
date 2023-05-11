@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Settings
+{% endblock %}
+
+{% block content %}
+    <div class="card card-body">
+        <h3 class="card-title text-center">Icon</h3>
+        <div class="row">
+            <div class="col-auto">
+                <img class="avatar bg-light rounded-circle mx-1" src="{{ user.profile.avatar.url }}" alt="Avatar" width="128" height="128">
+            </div>
+            <div class="col-auto">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.avatar }}
+                    <input class="btn btn-primary" type="submit">
+                </form>
+            </div>
+        </div>
+        <hr>
+        <p>More settings coming soon...</p>
+    </div>
+{% endblock %}

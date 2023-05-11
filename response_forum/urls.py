@@ -11,5 +11,8 @@ urlpatterns = [
     path('create', views.create_response, name='create'),
 
     # ajax
-    path('get_list', ajax.get_list_of_responses, name='list_of_responses')
+    path('get_list', ajax.get_list_of_responses, name='list_of_responses'),
+
+    # test
+    path('fake', views.create_fake_posts),
 ]

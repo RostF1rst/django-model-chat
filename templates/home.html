@@ -1,10 +1,22 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
     Home
 {% endblock %}
 
 {% block content %}
-    <p class="fs-1 text-center">Model chat</p>
-    <p class="fs-3 text-center">Simple model chat</p>
+    <div class="row mt-5">
+        <div class="col-lg">
+            <h1 class="text-light" style="text-indent: 150px">Model chat</h1>
+            <h5 class="text-light mx-3">
+                This is (not exactly) a chat with gpt4all language model created using pyllamacpp module and django framework.
+                Here you can ask a model and get response from it and if a response seems to be interesting you can post it for others to see.
+            </h5>
+            <a class="btn btn-primary btn-lg mx-center mt-3" href="{% url 'model-chat:chat' %}">Get Started</a>
+        </div>
+        <div class="col d-flex align-items-center justify-content-center">
+            <img src="{% static 'images/bot.png' %}" alt="bot" style="width: 400px">
+        </div>
+    </div>
 {% endblock %}

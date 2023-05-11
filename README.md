@@ -1,5 +1,6 @@
 # Django model chat
 Chat with gpt4all language model created using pyllamacpp and django framework
+> :warning: **Prompts to the model are processed locally. Check if your device is suitable for these tasks**
 ### Setup
 * Download your model (I use [this model](https://huggingface.co/LLukas22/gpt4all-lora-quantized-ggjt/resolve/main/ggjt-model.bin)) and put it in `model_chat/models` (don't forget to change `__path` variable in `model_chat/llama.py` if you use different model than I use)
 * Install required modules in terminal: `pip install -r requirements.txt`

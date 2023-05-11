@@ -4,7 +4,12 @@
         <div class="row d-flex">
             <div class="col-11">
                 <h5 class="card-title">{{ response.prompt }}</h5>
-                <p class="card-text"><small class="text-muted">{{ response.publication_date }}</small></p>
+                <p class="card-text">
+                    <img src="{{ response.author.profile.avatar.url }}" alt="avatar" class="rounded-circle bg-light avatar" width="32" height="32">
+                    <small class="text-muted">
+                        <a href="{% url 'users:user_page' response.author_id %}">@{{ response.author.username }}</a> · {{ response.publication_date }}
+                    </small>
+                </p>
             </div>
             <div class="col-1 text-center">
                 <a href="{% url 'response-forum:details' response.id %}"><p class="align-middle"><i class="bi bi-arrow-right"></i></p></a>

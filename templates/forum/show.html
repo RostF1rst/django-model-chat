@@ -14,5 +14,12 @@
         <div class="card card-body">
             <p class="card-text">{{ object.response }}</p>
         </div>
+        <hr>
+        <p class="card-text">
+            <img src="{{ response.author.profile.avatar.url }}" alt="avatar" class="rounded-circle bg-light avatar" width="32" height="32">
+            <small class="text-muted">
+                <a href="{% url 'users:user_page' response.author_id %}">@{{ response.author.username }}</a> · {{ response.publication_date }}
+            </small>
+        </p>
     </div>
 {% endblock %}

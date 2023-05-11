@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6">
+                <div class="card px-5 py-5" id="form1">
+                    <div class="form-data">
+                        <div class=""><h4 class="text-center">Register</h4></div>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="forms-inputs mb-4">
+                                <label for="id_username" class="form-label">Username</label>
+                                {{ form.username }}
+                                {% if form.username.errors %}
+                                    <p class="form-text"><small class="text-danger">{{ form.username.errors|first }}</small></p>
+                                {% endif %}
+                                <p class="form-text">{{ form.username.help_text }}</p>
+                                <label for="id_username" class="form-label mt-3">Password</label>
+                                {{ form.password1 }}
+                                {% if form.password1.errors %}
+                                    <p class="form-text"><small class="text-danger">{{ form.password2.errors|first }}</small></p>
+                                {% endif %}
+                                <div class="form-text">{{ form.password1.help_text }}</div>
+                                <label for="id_username" class="form-label mt-3">Confirm password</label>
+                                {{ form.password2 }}
+                                {% if form.password2.errors %}
+                                    <p class="form-text"><small class="text-danger">{{ form.password2.errors|first }}</small></p>
+                                {% endif %}
+                                <div class="form-text">{{ form.password2.help_text }}</div>
+                            </div>
+                            <p class="card-text mt-1">
+                                <small class="text-muted">
+                                    Already have an account? <a href="{% url 'users:login' %}">Login!</a>
+                                </small>
+                            </p>
+                            <div class="md-4">
+                                <button type="submit" class="btn btn-primary w-100">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
