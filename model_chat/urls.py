@@ -8,6 +8,6 @@ urlpatterns = [
     # views
     path('', views.chat, name='chat'),
 
-    # ajax paths
+    # ajax
     path('get_response/', ajax.get_response, name='get-response')
 ]

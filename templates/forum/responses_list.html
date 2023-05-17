@@ -1,11 +1,11 @@
-<div class="container" id="response_list">
+<div class="m-2" id="response_list">
     {% for response in object_list %}
         <hr>
         <div class="row d-flex">
             <div class="col-11">
                 <h5 class="card-title">{{ response.prompt }}</h5>
                 <p class="card-text">
-                    <img src="{{ response.author.profile.avatar.url }}" alt="avatar" class="rounded-circle bg-light avatar" width="32" height="32">
+                    <img src="{{ response.author.profile.avatar.url }}" alt="avatar" class="avatar avatar-sm">
                     <small class="text-muted">
                         <a href="{% url 'users:user_page' response.author_id %}">@{{ response.author.username }}</a> · {{ response.publication_date }}
                     </small>

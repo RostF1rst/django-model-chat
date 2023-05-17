@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block content %}
-    <div class="card card-body mt-3">
+    <div class="card card-body">
         <div class="row">
             <div class="col-auto">
-                <img src="{{ user.profile.avatar.url }}" alt="avatar" class="avatar rounded-circle bg-light" width="128" height="128">
+                <img src="{{ requested_user.profile.avatar.url }}" alt="avatar" class="avatar rounded-circle bg-light" width="128" height="128">
             </div>
             <div class="col-auto">
                 <h2 class="card-title">@{{ requested_user.username }}</h2>
@@ -24,16 +24,15 @@
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        {% if posts %}
-                            {% for post in posts %}
-                                <h5 class="card-title">{{ post.title }}</h5>
-                                <p class="card-text"><small class="text-muted">{{ post.publication_date }}</small></p>
-                                <button onclick="location.href='{% url 'block0:show_post' post.id %}'" type="button" class="btn btn-outline-primary">Show more...</button>
-                                {% if not forloop.last %}
-                                    <hr>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
+                        {% for response in responses %}
+                            <h5 class="card-title"><a href="{% url 'response-forum:details' response.id %}" class="link-light" style="text-decoration: none">{{ response.prompt }}</a></h5>
+                            <p class="card-text"><small class="text-muted">{{ response.publication_date }}</small></p>
+                            {% if not forloop.last %}
+                                <hr>
+                            {% endif %}
+                        {% empty %}
+                            <p class="card-text">Nothing here yet...</p>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

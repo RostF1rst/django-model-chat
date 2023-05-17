@@ -9,8 +9,9 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import sys
 from pathlib import Path
+from . import utils
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,8 +26,13 @@ SECRET_KEY = 'django-insecure-z)rx)seuh&e+cu6$g&3m_&e*idm5fcj+2hhda=u^eqcg#ol)rm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    utils.get_local_ip(),
+]
 
+# Print address of instance in local network
+print('Address in local network: http://{}:{}/'.format(ALLOWED_HOSTS[-1], sys.argv[-1].split(':')[-1]))
 
 # Application definition
 
@@ -51,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_model_chat.middleware.RestrictAccessToAdminPageMiddleware'
 ]
 
 ROOT_URLCONF = 'django_model_chat.urls'
@@ -136,6 +143,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'users:user_page_me'
 
 LOGOUT_REDIRECT_URL = 'users:login'

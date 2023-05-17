@@ -3,29 +3,59 @@
 {% block title %} Chat{% endblock %}
 
 {% block content %}
-    <div class="card card-body mt-3">
-        <div id="response-blank" style="display: none">
-            <h5 class="card-title">Response:</h5>
-            <div class="card card-body">
-                <p class="card-text" id="response-text" style="white-space: pre-line"></p>
-            </div>
-            <form id="post-response" class="mt-3" method="post" action="{% url 'response-forum:create' %}">
-                {% csrf_token %}
-                <input id="prompt-value" type="hidden" value="" name="prompt" required>
-                <input id="response-value" type="hidden" value="" name="response" required>
-                <input type="submit" class="btn btn-outline-secondary" value="Post this response">
-            </form>
-        </div>
-        <p id="welcoming-text" class="fs-3 text-center">Enter the prompt to get response</p>
-        <hr>
-        <form method="post" id="prompt-form">
+    <form id="post-response-form" method="post" action="{% url 'response-forum:create' %}">
         {% csrf_token %}
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="real" value="asdfasdf">
-                <label class="form-check-label" for="real">Real response</label>
+        <input id="prompt-value" type="hidden" value="" name="prompt" required>
+        <input id="response-value" type="hidden" value="" name="response" required>
+    </form>
+
+    <div class="card card-body">
+        <div class="card">
+            <div class="card-header">
+                Chat
             </div>
+            <div class="card-body">
+                <div id="prompt-message">
+                    <div class="d-flex flex-row justify-content-end mb-4">
+                        <div class="chat-message">
+                            <p class="small mb-0" id="content">
+                                Write a poem about a lonely computer that finds a cool PC and lives happily
+                            </p>
+                        </div>
+                        <img class="avatar avatar-med" src="{{ user.profile.avatar.url }}" alt="avatar">
+                    </div>
+                </div>
+                <div class="d-flex flex-row justify-content-start mb-4" id="response-message">
+                    {% load static %}
+                    <img class="avatar avatar-med" src="{% static 'images/bot.png' %}" alt="bot_avatar">
+                    <div class="chat-message">
+                        <p class="small mb-0" id="content">
+                            Hello! I'm ready to answer any of your question.
+                        </p>
+                        <div class="spinner-border spinner-border-sm" role="status" id="loading">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <input type="submit" id="post-response" class="btn btn-outline-secondary btn-sm mt-1"
+                               form="post-response-form" value="Post this response">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form class="mt-1" method="post" id="prompt-form">
+            {% csrf_token %}
+{#            <div class="form-check">#}
+{##}
+{#                <label class="form-check-label" for="real">Real response</label>#}
+{#            </div>#}
             <div class="input-group">
-                <input id="prompt" required type="text" class="form-control" placeholder="Prompt" aria-label="Prompt" aria-describedby="submit-but">
+                <div class="input-group-text">
+                    <label class="form-check-label" for="real">Real&nbsp;</label>
+                    <input class="form-check-input" type="checkbox" id="real" value="asdfasdf">
+                </div>
+
+                <input id="prompt" required type="text" class="form-control" placeholder="Prompt" aria-label="Prompt"
+                       aria-describedby="submit-but">
                 <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-send"></i></button>
             </div>
         </form>

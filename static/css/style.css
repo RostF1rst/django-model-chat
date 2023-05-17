@@ -7,5 +7,26 @@ body{
 }
 
 .avatar{
+    background-color: black;
     object-fit: cover;
+    clip-path: circle();
+}
+
+.avatar-sm{
+    width: 35px;
+    height: 35px;
+}
+
+.avatar-med{
+    width: 45px;
+    height: 45px;
+}
+
+.chat-message{
+    background-color: black;
+    padding: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border: 1px solid rgba(255, 255, 255, .5);
+    border-radius: 15px;
 }

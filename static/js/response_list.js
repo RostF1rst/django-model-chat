@@ -1,3 +1,5 @@
+var timeout;
+
 $(document).ready(function() {
     function updateModelsList(searchTerm) {
         $.ajax({
@@ -11,6 +13,12 @@ $(document).ready(function() {
 
     $('#filter').on('input', function() {
         let searchTerm = $(this).val();
-        updateModelsList(searchTerm);
+
+        if(timeout) clearTimeout(timeout);
+
+        timeout = setTimeout(function (){
+            let searchTerm = $("#filter").val();
+            updateModelsList(searchTerm);
+        }, 200)
     });
 });

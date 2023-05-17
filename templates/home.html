@@ -6,17 +6,44 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row mt-5">
-        <div class="col-lg">
-            <h1 class="text-light" style="text-indent: 150px">Model chat</h1>
-            <h5 class="text-light mx-3">
-                This is (not exactly) a chat with gpt4all language model created using pyllamacpp module and django framework.
-                Here you can ask a model and get response from it and if a response seems to be interesting you can post it for others to see.
-            </h5>
-            <a class="btn btn-primary btn-lg mx-center mt-3" href="{% url 'model-chat:chat' %}">Get Started</a>
-        </div>
-        <div class="col d-flex align-items-center justify-content-center">
-            <img src="{% static 'images/bot.png' %}" alt="bot" style="width: 400px">
+    <div class="container mb-5">
+        <h1 class="display-3"><b>Model chat</b></h1>
+        <p class="text">This is (not exactly) a chat with gpt4all language model created using pyllamacpp module and django framework.
+            Here you can ask a model and get response from it and if a response seems to be interesting you can post it for others to see.</p>
+    </div>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col">
+                <h2>About chat</h2>
+                <p>As soon as you visit the chat page you will see an input field in front of you.
+                    The checkbox labeled "Real response" determines if the prompt will be processed by the model you have set.
+                    If you do not check the box, then instead of processing the prompt, the model will issue a random phrase received from a third-party source.
+                    This is necessary to test the response mechanism or if you do not want to overload your device with heavy prompts processing operations.
+                    Everything else is intuitive.
+                    In the input field, you enter a prompt, send it, and receive a response.</p>
+                <p><a class="btn btn-primary" href="{% url 'model-chat:chat' %}" role="button">Go to chat</a></p>
+            </div>
+            <div class="col">
+                <h2>About response forum</h2>
+                <p>Once you receive a response from the model, you may notice a "Post this response" button.
+                    By clicking on it, you will create a post containing your prompt and the model's response to it.
+                    Also, on the responses page, you can view other prompts and responses posted by other users.</p>
+                <p><a class="btn btn-primary" href="{% url 'response-forum:list' %}" role="button">Go to responses</a></p>
+            </div>
+            {% if user.is_superuser %}
+                <div class="col">
+                    <h2>About admin features</h2>
+                    <p style="white-space: pre-line">Superusers have access to some useful features. Among them:
+                        - Fake users and responses:
+                        You can create fake users and responses by using '/users/fake' and '/forum/fake' links respectively.
+                        Both of these links accept 'amount' parameter to specify amount of fakes to create (default is 3).
+                        Fake users' usernames and passwords are stored in 'fake_users.txt'.
+                        - Admin page:
+                        For those who worked with django, reading this is unnecessary.
+                        Admin page is a tool to manage data stored in your database.
+                        You can create any response or user you want and edit the existing ones.</p>
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
