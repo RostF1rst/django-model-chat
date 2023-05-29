@@ -18,8 +18,8 @@
                 <div id="prompt-message">
                     <div class="d-flex flex-row justify-content-end mb-4">
                         <div class="chat-message">
-                            <p class="small mb-0" id="content">
-                                Write a poem about a lonely computer that finds a cool PC and lives happily
+                            <p class="small mb-0 text-break" id="content" style="white-space: pre-wrap">
+
                             </p>
                         </div>
                         <img class="avatar avatar-med" src="{{ user.profile.avatar.url }}" alt="avatar">
@@ -29,9 +29,7 @@
                     {% load static %}
                     <img class="avatar avatar-med" src="{% static 'images/bot.png' %}" alt="bot_avatar">
                     <div class="chat-message">
-                        <p class="small mb-0" id="content">
-                            Hello! I'm ready to answer any of your question.
-                        </p>
+                        <p class="small mb-0 text-break" id="content" style="white-space: pre-wrap">Hello! I'm ready to answer any of your question.</p>
                         <div class="spinner-border spinner-border-sm" role="status" id="loading">
                             <span class="visually-hidden">Loading...</span>
                         </div>
@@ -44,10 +42,6 @@
 
         <form class="mt-1" method="post" id="prompt-form">
             {% csrf_token %}
-{#            <div class="form-check">#}
-{##}
-{#                <label class="form-check-label" for="real">Real response</label>#}
-{#            </div>#}
             <div class="input-group">
                 <div class="input-group-text">
                     <label class="form-check-label" for="real">Real&nbsp;</label>
@@ -55,7 +49,7 @@
                 </div>
 
                 <input id="prompt" required type="text" class="form-control" placeholder="Prompt" aria-label="Prompt"
-                       aria-describedby="submit-but">
+                       aria-describedby="submit-but" maxlength="1000">
                 <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-send"></i></button>
             </div>
         </form>

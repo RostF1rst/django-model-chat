@@ -1,3 +1,5 @@
+import random
+
 import requests
 from django.http import JsonResponse
 from .llama import LlamaModel
@@ -11,6 +13,11 @@ def get_response(request):
             model = LlamaModel()
             response = model.get_answer(prompt)
         else:
-            response = requests.get('https://evilinsult.com/generate_insult.php?lang=ru&type=json').json()['insult']
+            urls = [
+                ('http://asdfast.beobit.net/api/', 'text'),
+                ('https://evilinsult.com/generate_insult.php?lang=ru&type=json', 'insult')
+            ]
+            choice = random.choice(urls)
+            response = requests.get(choice[0]).json()[choice[1]]
         return JsonResponse({'response': response})
     return JsonResponse({'error': 'forbidden'})

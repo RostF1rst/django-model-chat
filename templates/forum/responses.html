@@ -7,12 +7,13 @@
 
 {% block content %}
     <div class="card card-body">
-        <div class="container row">
-            <div class="col-4">
+        <div class="d-flex flex-row">
+            <div class="col">
                 <h4 class="card-title mt-2">Responses</h4>
             </div>
-            <div class="col-8">
-                <input id="filter" name="filter" type="text" class="form-control" placeholder="Search" value="{{ search }}">
+            <div class="col align-items-end">
+                <input id="filter" name="filter" type="text" class="form-control" placeholder="Search"
+                       value="{{ search }}">
             </div>
         </div>
         {% include 'forum/responses_list.html' %}
@@ -21,6 +22,6 @@
 
 {% block scrpits %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript">const responseListUrl='{% url 'response-forum:list_of_responses' %}'</script>
+    <script type="text/javascript">const responseListUrl = '{% url 'response-forum:list_of_responses' %}'</script>
     <script type="text/javascript" src="{% static 'js/response_list.js' %}"></script>
 {% endblock %}

@@ -12,8 +12,6 @@ $(document).ready(function() {
     }
 
     $('#filter').on('input', function() {
-        let searchTerm = $(this).val();
-
         if(timeout) clearTimeout(timeout);
 
         timeout = setTimeout(function (){

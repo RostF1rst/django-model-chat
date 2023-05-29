@@ -16,8 +16,8 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.shortcuts import render
-from django.urls import path, include
+from django.shortcuts import render, redirect
+from django.urls import path, include, reverse
 
 from . import settings
 
@@ -26,5 +26,7 @@ urlpatterns = [
     path('chat/', include('model_chat.urls')),
     path('forum/', include('response_forum.urls')),
     path('users/', include('users.urls')),
-    path('', lambda request: render(request=request, template_name='home.html'), name='home')
+    path('', lambda request: render(request=request, template_name='home.html'), name='home'),
+
+    path('favicon.ico', lambda request: redirect('/static/favicon.ico')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

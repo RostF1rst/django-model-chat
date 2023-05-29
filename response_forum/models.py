@@ -6,7 +6,7 @@ from django.utils.timezone import now
 # Create your models here.
 class Response(models.Model):
     prompt = models.CharField(max_length=1000)
-    response = models.CharField(max_length=1000)
+    response = models.CharField(max_length=10000)
     publication_date = models.DateTimeField(default=now())
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
