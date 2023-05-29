@@ -3,3 +3,5 @@ pyllamacpp==2.1.3
 requests
 faker
 django-cleanup
+Pillow
+numpy
