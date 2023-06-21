@@ -2,6 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+import warnings
 
 
 def main():
@@ -16,12 +17,16 @@ def main():
             "forget to activate a virtual environment?"
         ) from exc
 
-    model_path_listdir = os.listdir('./model_chat/models')
-    if model_path_listdir:
-        if not any(i.endswith('.bin') for i in model_path_listdir):
-            raise Exception("Model should be a .bin file")
+    try:
+        model_path_listdir = os.listdir('./model_chat/models')
+    except FileNotFoundError:
+        warnings.warn('Path "./model_chat/models" doesn\'t exist!')
     else:
-        raise Exception("Put model in '/model_chat/models' directory")
+        if model_path_listdir:
+            if not any(i.endswith('.bin') for i in model_path_listdir):
+                warnings.warn("Model should be a .bin file")
+        else:
+            warnings.warn("Put model in '/model_chat/models' directory")
 
     execute_from_command_line(sys.argv)
 
